@@ -1,0 +1,25 @@
+.movie-poster {
+  width: 90%;
+  height: 200px;
+}
+
+.movie-item {
+  width: 30%;
+}
+
+.view-more-btn {
+  height: 40px;
+  width: 100px;
+  border-width: 0px;
+  background-color: blue;
+  color: white;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.rating-view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}

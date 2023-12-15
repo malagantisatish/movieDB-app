@@ -1,0 +1,48 @@
+.header {
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 1px 1px;
+}
+
+.logo-heading {
+  font-family: 'Roboto';
+  font-size: 28px;
+  padding-left: 10px;
+}
+
+.nav-options {
+  display: flex;
+  list-style: none;
+  width: 40%;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.option {
+  height: 50px;
+  width: 120px;
+  background-color: transparent;
+  border-width: 0px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.search-input {
+  height: 30px;
+  width: 60%;
+  margin-left: 10px;
+}
+
+.search-btn {
+  background-color: grey;
+  border-width: 0px;
+}
