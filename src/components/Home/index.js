@@ -17,7 +17,7 @@ class Home extends Component {
     homeMovieList: [],
     status: apiStatus.initial,
     isSearch: false,
-    searchInput: 'search',
+    searchInput: '',
     pageNo: 1,
   }
 
@@ -46,10 +46,10 @@ class Home extends Component {
     const {searchInput, isSearch, pageNo} = this.state
     const apiKey = 'd69c7e5016c1d973fd6a3615ce35e5ae'
     const normalUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
-    // const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
-    // const url = isSearch ? searchUrl : normalUrl
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
+    const url = isSearch ? searchUrl : normalUrl
     this.setState({status: apiStatus.inProcess})
-    const response = await fetch(normalUrl)
+    const response = await fetch(url)
     const data = await response.json()
     if (response.ok) {
       const formattedData = data.results.map(each =>
@@ -80,7 +80,10 @@ class Home extends Component {
   }
 
   getTheSearchInput = value => {
-    this.setState({searchInput: value, isSearch: true}, this.getTheMovieData)
+    this.setState(
+      {searchInput: value, isSearch: true},
+      this.getPopularMoviesURL,
+    )
   }
 
   renderTheLoaderView = () => (

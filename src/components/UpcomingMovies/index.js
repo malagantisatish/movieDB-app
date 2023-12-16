@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {CiSquarePlus, CiSquareMinus} from 'react-icons/ci'
+
 import Loader from 'react-loader-spinner'
 import MovieItem from '../MovieItem'
 import Header from '../Header'
@@ -46,10 +46,10 @@ class UpcomingMovies extends Component {
     const {searchInput, isSearch, pageNo} = this.state
     const apiKey = 'd69c7e5016c1d973fd6a3615ce35e5ae'
     const normalUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
-    //  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
-    //  const url = isSearch ? searchUrl : normalUrl
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
+    const url = isSearch ? searchUrl : normalUrl
     this.setState({status: apiStatus.inProcess})
-    const response = await fetch(normalUrl)
+    const response = await fetch(url)
     const data = await response.json()
     if (response.ok) {
       const formattedData = data.results.map(each =>
@@ -98,7 +98,7 @@ class UpcomingMovies extends Component {
           className="btn"
           onClick={this.decreaseThePageCount}
         >
-          <CiSquareMinus size={25} />
+          -
         </button>
         <p>{pageNo}</p>
         <button
@@ -106,7 +106,7 @@ class UpcomingMovies extends Component {
           className="btn"
           onClick={this.increaseThePageCount}
         >
-          <CiSquarePlus size={25} />
+          +
         </button>
       </div>
     )
