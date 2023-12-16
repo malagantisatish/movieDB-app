@@ -23,7 +23,7 @@ const MovieItem = props => {
   return (
     <li className="movie-item">
       <img
-        src={`https://image.tmdb.org/t/p/w500${backdropPath}`}
+        src={`https://image.tmdb.org/t/p/w500${posterPath}`}
         className="movie-poster"
         alt={title}
       />
