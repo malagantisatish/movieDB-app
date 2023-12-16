@@ -21,9 +21,15 @@
   display: flex;
   width: 100vw;
   justify-content: center;
+  align-items: center;
 }
 
 .btn {
   background-color: transparent;
   border-width: 0px;
+  border-radius: 3px;
+  height: 30px;
+  width: 30px;
+  background-color: grey;
+  margin: 2px;
 }

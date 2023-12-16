@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {CiSquarePlus, CiSquareMinus} from 'react-icons/ci'
+// import {CiSquarePlus, CiSquareMinus} from 'react-icons/ci'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import MovieItem from '../MovieItem'
@@ -98,7 +98,7 @@ class Home extends Component {
           className="btn"
           onClick={this.decreaseThePageCount}
         >
-          <CiSquareMinus size={25} />
+          -
         </button>
         <p>{pageNo}</p>
         <button
@@ -106,7 +106,7 @@ class Home extends Component {
           className="btn"
           onClick={this.increaseThePageCount}
         >
-          <CiSquarePlus size={25} />
+          +
         </button>
       </div>
     )
