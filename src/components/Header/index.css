@@ -45,4 +45,6 @@
 .search-btn {
   background-color: grey;
   border-width: 0px;
+  height: 30px;
+  width: 80px;
 }

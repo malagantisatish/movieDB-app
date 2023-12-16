@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import {IoIosSearch} from 'react-icons/io'
+
 import './index.css'
 
 const Header = ({getTheSearchInput}) => {
@@ -31,30 +31,24 @@ const Header = ({getTheSearchInput}) => {
           className="search-btn"
           onClick={submitSearchValue}
         >
-          <IoIosSearch size={25} />
+          Search
         </button>
       </div>
 
       <ul className="nav-options">
         <Link to="/">
           <li>
-            <button type="button" className="option">
-              Popular
-            </button>
+            <h1 className="option">Popular</h1>
           </li>
         </Link>
         <Link to="/top-rated">
           <li>
-            <button type="button" className="option">
-              Top Rated
-            </button>
+            <h1 className="option">Top Rated</h1>
           </li>
         </Link>
         <Link to="/upcoming">
           <li>
-            <button type="button" className="option">
-              Upcoming
-            </button>
+            <h1 className="option">Upcoming</h1>
           </li>
         </Link>
       </ul>

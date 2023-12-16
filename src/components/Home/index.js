@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {CiSquarePlus, CiSquareMinus} from 'react-icons/ci'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import MovieItem from '../MovieItem'
@@ -17,10 +18,11 @@ class Home extends Component {
     status: apiStatus.initial,
     isSearch: false,
     searchInput: 'search',
+    pageNo: 1,
   }
 
   componentDidMount() {
-    this.getTheMovieData()
+    this.getPopularMoviesURL()
   }
 
   getTheFormattedData = item => ({
@@ -40,10 +42,10 @@ class Home extends Component {
     voteCount: item.vote_count,
   })
 
-  getTheMovieData = async () => {
-    const {searchInput, isSearch} = this.state
+  getPopularMoviesURL = async () => {
+    const {searchInput, isSearch, pageNo} = this.state
     const apiKey = 'd69c7e5016c1d973fd6a3615ce35e5ae'
-    const normalUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1` // url
+    const normalUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
     // const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
     // const url = isSearch ? searchUrl : normalUrl
     this.setState({status: apiStatus.inProcess})
@@ -60,6 +62,23 @@ class Home extends Component {
     }
   }
 
+  increaseThePageCount = () => {
+    this.setState(
+      prevState => ({pageNo: prevState.pageNo + 1}),
+      this.getPopularMoviesURL,
+    )
+  }
+
+  decreaseThePageCount = () => {
+    const {pageNo} = this.state
+    if (pageNo > 1) {
+      this.setState(
+        prevState => ({pageNo: prevState.pageNo - 1}),
+        this.getPopularMoviesURL,
+      )
+    }
+  }
+
   getTheSearchInput = value => {
     this.setState({searchInput: value, isSearch: true}, this.getTheMovieData)
   }
@@ -70,6 +89,29 @@ class Home extends Component {
     </div>
   )
 
+  renderThePagination = () => {
+    const {pageNo} = this.state
+    return (
+      <div className="pagination">
+        <button
+          type="button"
+          className="btn"
+          onClick={this.decreaseThePageCount}
+        >
+          <CiSquareMinus size={25} />
+        </button>
+        <p>{pageNo}</p>
+        <button
+          type="button"
+          className="btn"
+          onClick={this.increaseThePageCount}
+        >
+          <CiSquarePlus size={25} />
+        </button>
+      </div>
+    )
+  }
+
   renderTheSuccessView = () => {
     const {homeMovieList} = this.state
     return (
@@ -79,6 +121,7 @@ class Home extends Component {
             <MovieItem key={each.id} movieDetails={each} />
           ))}
         </ul>
+        {this.renderThePagination()}
       </div>
     )
   }

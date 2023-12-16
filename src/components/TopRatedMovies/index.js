@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import {CiSquarePlus, CiSquareMinus} from 'react-icons/ci'
 import Loader from 'react-loader-spinner'
 import MovieItem from '../MovieItem'
 import Header from '../Header'
@@ -17,6 +18,7 @@ class TopRatedMovies extends Component {
     status: apiStatus.initial,
     searchInput: '',
     isSearch: false,
+    pageNo: 1,
   }
 
   componentDidMount() {
@@ -41,9 +43,9 @@ class TopRatedMovies extends Component {
   })
 
   getTheMovieData = async () => {
-    const {searchInput, isSearch} = this.state
+    const {searchInput, isSearch, pageNo} = this.state
     const apiKey = 'd69c7e5016c1d973fd6a3615ce35e5ae'
-    const normalUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1` // url
+    const normalUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
     //  const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
     //  const url = isSearch ? searchUrl : normalUrl
     this.setState({status: apiStatus.inProcess})
@@ -58,6 +60,46 @@ class TopRatedMovies extends Component {
       console.log(formattedData)
       this.setState({homeMovieList: formattedData, status: apiStatus.success})
     }
+  }
+
+  increaseThePageCount = () => {
+    this.setState(
+      prevState => ({pageNo: prevState.pageNo + 1}),
+      this.getTheMovieData,
+    )
+  }
+
+  decreaseThePageCount = () => {
+    const {pageNo} = this.state
+    if (pageNo > 1) {
+      this.setState(
+        prevState => ({pageNo: prevState.pageNo - 1}),
+        this.getTheMovieData,
+      )
+    }
+  }
+
+  renderThePagination = () => {
+    const {pageNo} = this.state
+    return (
+      <div className="pagination">
+        <button
+          type="button"
+          className="btn"
+          onClick={this.decreaseThePageCount}
+        >
+          <CiSquareMinus size={25} />
+        </button>
+        <p>{pageNo}</p>
+        <button
+          type="button"
+          className="btn"
+          onClick={this.increaseThePageCount}
+        >
+          <CiSquarePlus size={25} />
+        </button>
+      </div>
+    )
   }
 
   getTheSearchInput = value => {
@@ -79,6 +121,7 @@ class TopRatedMovies extends Component {
             <MovieItem key={each.id} movieDetails={each} />
           ))}
         </ul>
+        {this.renderThePagination()}
       </div>
     )
   }

@@ -16,3 +16,14 @@
   align-items: center;
   justify-content: center;
 }
+
+.pagination {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
+.btn {
+  background-color: transparent;
+  border-width: 0px;
+}
