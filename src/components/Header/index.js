@@ -19,7 +19,7 @@ const Header = ({getTheSearchInput}) => {
       <h1 className="logo-heading">movieDB</h1>
       <div className="search-container">
         <input
-          type="search"
+          type="text"
           className="search-input"
           value={searchValue}
           onChange={updateSearchInput}

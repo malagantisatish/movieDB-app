@@ -12,7 +12,7 @@ const apiStatus = {
   failure: 'FAIL',
 }
 
-class UpcomingMovies extends Component {
+class TopRatedMovies extends Component {
   state = {
     movieData: [],
     status: apiStatus.initial,
@@ -45,7 +45,7 @@ class UpcomingMovies extends Component {
   getTheMovieData = async () => {
     const {searchInput, isSearch, pageNo} = this.state
     const apiKey = 'd69c7e5016c1d973fd6a3615ce35e5ae'
-    const normalUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
+    const normalUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=${pageNo}` // url
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1`
     const url = isSearch ? searchUrl : normalUrl
     this.setState({status: apiStatus.inProcess})
@@ -61,16 +61,6 @@ class UpcomingMovies extends Component {
       this.setState({homeMovieList: formattedData, status: apiStatus.success})
     }
   }
-
-  getTheSearchInput = value => {
-    this.setState({searchInput: value, isSearch: true}, this.getTheMovieData)
-  }
-
-  renderTheLoaderView = () => (
-    <div className="loader-container">
-      <Loader type="BallTriangle" color="#F7931E" height={50} width={50} />
-    </div>
-  )
 
   increaseThePageCount = () => {
     this.setState(
@@ -98,7 +88,7 @@ class UpcomingMovies extends Component {
           className="btn"
           onClick={this.decreaseThePageCount}
         >
-          -
+          Prev
         </button>
         <p>{pageNo}</p>
         <button
@@ -106,11 +96,21 @@ class UpcomingMovies extends Component {
           className="btn"
           onClick={this.increaseThePageCount}
         >
-          +
+          Next
         </button>
       </div>
     )
   }
+
+  getTheSearchInput = value => {
+    this.setState({searchInput: value, isSearch: true}, this.getTheMovieData)
+  }
+
+  renderTheLoaderView = () => (
+    <div className="loader-container">
+      <Loader type="BallTriangle" color="#F7931E" height={50} width={50} />
+    </div>
+  )
 
   renderTheSuccessView = () => {
     const {homeMovieList} = this.state
@@ -126,7 +126,7 @@ class UpcomingMovies extends Component {
     )
   }
 
-  renderTheUpcomingMovies = () => {
+  renderTheTopRatedMovies = () => {
     const {status} = this.state
     switch (status) {
       case apiStatus.inProcess:
@@ -140,13 +140,14 @@ class UpcomingMovies extends Component {
   }
 
   render() {
+    const {searchInput} = this.state
     return (
       <>
         <Header getTheSearchInput={this.getTheSearchInput} />
-        {this.renderTheUpcomingMovies()}
+        {this.renderTheTopRatedMovies()}
       </>
     )
   }
 }
 
-export default UpcomingMovies
+export default TopRatedMovies

@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import Home from './components/Home'
-import TopRatedMovies from './components/TopRatedMovies'
-import UpcomingMovies from './components/UpcomingMovies'
+import PopularMoviesPage from './components/PopularMoviesPage'
+import TopRatedMoviesPage from './components/TopRatedMoviesPage'
+import UpcomingMoviesPage from './components/UpcomingMoviesPage'
 import './App.css'
 import SingleMovieDetails from './components/SingleMovieDetails'
 
@@ -9,9 +9,9 @@ import SingleMovieDetails from './components/SingleMovieDetails'
 const App = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/top-rated" component={TopRatedMovies} />
-      <Route exact path="/upcoming" component={UpcomingMovies} />
+      <Route exact path="/" component={PopularMoviesPage} />
+      <Route exact path="/top-rated" component={TopRatedMoviesPage} />
+      <Route exact path="/upcoming" component={UpcomingMoviesPage} />
       <Route exact path="/movie/:id" component={SingleMovieDetails} />
     </Switch>
   </BrowserRouter>

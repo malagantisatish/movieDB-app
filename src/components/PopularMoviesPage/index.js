@@ -101,7 +101,7 @@ class Home extends Component {
           className="btn"
           onClick={this.decreaseThePageCount}
         >
-          -
+          Prev
         </button>
         <p>{pageNo}</p>
         <button
@@ -109,7 +109,7 @@ class Home extends Component {
           className="btn"
           onClick={this.increaseThePageCount}
         >
-          +
+          Next
         </button>
       </div>
     )
